@@ -1,0 +1,112 @@
+#VRML_SIM V8.2.0 utf8
+# A simple bus.
+# Sponsored by the CTI project RO2IVSim (http://transport.epfl.ch/simulator-for-mobile-robots-and-intelligent-vehicles)
+
+PROTO Bus [
+  field     SFVec3f    translation       0 1 0
+  field     SFRotation rotation          0 1 0 0
+  vrmlField SFColor    color             0.03 0.12 0.42
+  field     SFString   name              "vehicle"
+  field     SFString   controller        "void"
+  field     SFString   controllerArgs    ""
+  field     SFBool     synchronization   TRUE 
+  field     MFNode     sensorsSlotFront  NULL
+  field     MFNode     sensorsSlotRear   NULL
+  field     MFNode     sensorsSlotTop    NULL
+  field     MFNode     sensorsSlotCenter NULL
+]
+{
+Car {
+  translation IS translation
+  rotation IS rotation
+  name IS name
+  controller IS controller
+  controllerArgs IS controllerArgs
+  synchronization IS synchronization
+  trackFront 4.5
+  trackRear 4.5
+  wheelbase 8
+  minSteeringAngle -0.4
+  maxSteeringAngle 0.4
+  suspensionFrontSpringConstant 1e+06
+  suspensionFrontDampingConstant 10000
+  suspensionRearSpringConstant 1e+06
+  suspensionRearDampingConstant 10000
+  wheelsDampingConstant 15
+  extensionSlot [
+    Transform {
+      children IS sensorsSlotCenter
+    }
+    Transform {
+      translation 0 0.2 11.5
+      rotation 0 1 0 3.14159
+      children IS sensorsSlotFront
+    }
+    Transform {
+      translation 0 5.3 2.5
+      rotation 0 1 0 3.14159
+      children IS sensorsSlotTop
+    }
+    Transform {
+      translation 0 1 -6.2
+      children IS sensorsSlotRear
+    }
+    BusShape {
+      color IS color
+    }
+    AutomobileLights {
+      front [
+        Transform {
+          translation -1.6 1 11.13
+          rotation 1 0 0 1.5708
+          children [
+            DEF FRONT_SPOT Shape {
+              appearance Appearance {
+                material Material {
+                }
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.21
+                subdivision 24
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 1.6 1 11.13
+          rotation 1 0 0 1.5708
+          children [
+            USE FRONT_SPOT
+          ]
+        }
+      ]
+    }
+  ]
+  boundingObject Transform {
+    translation 0 2.4 2.6
+    children [
+      Box {
+        size 4.7 5.2 17.3
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 8000
+    centerOfMass [
+      0 0.1 5.7
+    ]
+  }
+  wheelFrontRight BusWheel {
+  }
+  wheelFrontLeft BusWheel {
+  }
+  wheelRearRight BusWheel {
+  }
+  wheelRearLeft BusWheel {
+  }
+  brakeCoefficient 2000
+  time0To100 25
+}
+}

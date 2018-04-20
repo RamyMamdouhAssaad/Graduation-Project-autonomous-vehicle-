@@ -1,0 +1,95 @@
+#VRML_SIM V8.2.0 utf8
+# A simple non-controllable bus model without physics properties
+# Sponsored by the CTI project RO2IVSim (http://transport.epfl.ch/simulator-for-mobile-robots-and-intelligent-vehicles)
+
+PROTO BusSimple [
+  field     SFVec3f    translation       0 1 0
+  field     SFRotation rotation          0 1 0 0
+  vrmlField SFColor    color             0.03 0.12 0.42
+  field     SFString   name              "vehicle"
+]
+{
+Solid {
+  translation IS translation
+  rotation IS rotation
+  name IS name
+  children [
+    BusShape {
+      color IS color
+    }
+    Transform {
+      translation -1.6 1 11.13
+      rotation 1 0 0 1.5708
+      children [
+        DEF FRONT_SPOT Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.21
+            subdivision 24
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 1.6 1 11.13
+      rotation 1 0 0 1.5708
+      children [
+        USE FRONT_SPOT
+      ]
+    }
+    Solid {
+      translation 2.25 0 0
+      rotation 0 0 1 -1.5708
+      children [
+        Slot {
+          type "automobile wheel"
+          endPoint BusWheel { enablePhysics FALSE }
+        }
+      ]
+    }
+    Solid {
+      translation 2.25 0 8
+      rotation 0 0 1 -1.5708
+      children [
+        Slot {
+          type "automobile wheel"
+          endPoint BusWheel { enablePhysics FALSE }
+        }
+      ]
+    }
+    Solid {
+      translation -2.25 0 0
+      rotation 0 0 1 1.5708
+      children [
+        Slot {
+          type "automobile wheel"
+          endPoint BusWheel { enablePhysics FALSE }
+        }
+      ]
+    }
+    Solid {
+      translation -2.25 0 8
+      rotation 0 0 1 1.5708
+      children [
+        Slot {
+          type "automobile wheel"
+          endPoint BusWheel { enablePhysics FALSE }
+        }
+      ]
+    }
+  ]
+  boundingObject Transform {
+    translation 0 2.4 2.6
+    children [
+      Box {
+        size 4.7 5.2 17.3
+      }
+    ]
+  }
+  physics NULL
+}
+}

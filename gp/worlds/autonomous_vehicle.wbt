@@ -1,0 +1,1162 @@
+#VRML_SIM V8.3.2 utf8
+WorldInfo {
+  info [
+    "Autonomous Vehicle Simulation"
+    "The simple controller example uses an on-board camera to follow the yellow road lines and a SICK sensor to avoid the obstacles."
+    "The control of the vehicle is done using the driver library."
+    "The vehicle based on the Car PROTO is modelled with realistic physics properties: motor torques, body mass, friction forces, suspensions, etc."
+  ]
+  title "Autonomous Vehicle"
+  ERP 0.6
+  basicTimeStep 10
+  lineScale 1
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+    }
+    ContactProperties {
+      material2 "CitroenCZeroWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+    }
+    ContactProperties {
+      material2 "ToyotaPriusWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.325392 0.854257 -0.40542 5.11686
+  position -59.4553 7.65621 120.7
+  near 1
+  follow "vehicle"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF GROUND Solid {
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+        texture ImageTexture {
+          url [
+            "textures/ground.jpg"
+          ]
+        }
+        textureTransform TextureTransform {
+          scale 100 100
+        }
+      }
+      geometry DEF GROUND_PLANE Plane {
+        size 2000 2000
+      }
+    }
+  ]
+  boundingObject USE GROUND_PLANE
+  locked TRUE
+}
+CurvedRoadSegment {
+  translation -4.5 0.02 64.5
+  rotation 0 1 0 4.71239
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation -4.5 0.02 105
+  rotation 0 1 0 1.5708
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 69
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation 64.5 0.02 64.5
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation 105 0.02 64.5
+  rotation 0 1 0 3.1416
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 69
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation 64.5 0.02 -4.5
+  rotation 0 1 0 1.5708
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+RoadIntersection {
+  translation 45 0.02 -45
+  rotation 0 1 0 0.785398
+  roadsWith 21.5
+  startRoadsLenght 8.75
+  startRoadsNumberOfLanes 4
+  startRoadsDashedLine [
+    TRUE
+    FALSE
+  ]
+  startRoadsSignsLength 0.9
+  startRoadBorder FALSE
+  startRoadsTexture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation -4.5 0.02 -45
+  rotation 0 1 0 1.5708
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 30
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation -4.5 0.02 -4.5
+  rotation 0 1 0 3.1416
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation -45 0.02 25.5
+  rotation 0 1 0 3.1416
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 30
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+RoadIntersection {
+  translation -45 0.02 45
+  rotation 0 1 0 0.785398
+  roadsWith 21.5
+  startRoadsLenght 8.75
+  startRoadsNumberOfLanes 4
+  startRoadsDashedLine [
+    TRUE
+    FALSE
+  ]
+  startRoadsSignsLength 0.9
+  startRoadBorder FALSE
+  startRoadsTexture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation -25.5 0.02 45
+  rotation 0 -1 0 4.71238
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 30
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation 4.5 0.02 4.5
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation 45 0.02 4.5
+  rotation 0 -1 0 3.14158
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 30
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation 4.5 0.02 -64.5
+  rotation 0 1 0 1.5708
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation 4.5 0.02 -105
+  rotation 0 -1 0 1.57079
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 69
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation -64.5 0.02 -64.5
+  rotation 0 1 0 3.1416
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+StraightRoadSegment {
+  translation -105 0.02 -64.5
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  length 69
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+CurvedRoadSegment {
+  translation -64.5 0.02 4.5
+  rotation 0 1 0 4.7124
+  width 21.5
+  numberOfLanes 4
+  dashedLine [
+    TRUE
+    FALSE
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  curvatureRadius 40.5
+  subdivision 16
+  texture [
+    "textures/road_double_yellow.jpg"
+  ]
+}
+BmwX5 {
+  hidden position_0_0 -0.124014
+  hidden position2_0_0 209.642
+  hidden position_0_1 -0.11623
+  hidden position2_0_1 207.477
+  hidden position_0_2 210.406
+  hidden position_0_3 209.952
+  hidden translation_1 -0.0365006 0.00250074 0.0264176
+  hidden rotation_1 -0.0372266 0.998955 -0.0265341 1.78922
+  hidden translation_2 0.0573645 -0.00107729 0.0120704
+  hidden rotation_2 0.233151 0.969678 0.073246 0.476199
+  hidden translation_3 0.00886243 0.000139008 -0.0130805
+  hidden rotation_3 8.00564e-05 1 -0.000100806 2.47956
+  hidden translation_4 0.0124305 -0.000140077 0.0113243
+  hidden rotation_4 0.00012629 1 0.000137717 -1.91572
+  translation -15.4208 0.372796 93.5441
+  rotation 0.0527553 0.997986 0.0352172 0.307131
+  controller "autonomous_vehicle"
+  sensorsSlotFront [
+    SickLms291 {
+      translation 0 -0.14 -0.09
+    }
+  ]
+  sensorsSlotTop [
+    Camera {
+      translation 0 -0.05 -0.72
+      children [
+        Transform {
+          translation 0 0 0.05
+          rotation 1 0 0 1.5708
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                }
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.04
+              }
+            }
+          ]
+        }
+      ]
+      fieldOfView 1
+      width 128
+    }
+  ]
+  sensorsSlotCenter [
+    GPS {
+    }
+    Gyro {
+    }
+    Display {
+      width 200
+      height 150
+    }
+  ]
+}
+DEF TRAFFIC_LIGHT Robot {
+  translation -55.2732 0 34.665
+  children [
+    Pole {
+      slot [
+        TrafficLight {
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+    }
+  ]
+  controller "traffic_light"
+}
+DEF CROSSROADS_TRAFFIC_LIGHTS Robot {
+  translation 45 0 -45
+  children [
+    TrafficLightBigPole {
+      translation -10.4 0 -10.4
+      slot1 [
+        TrafficLight {
+          red_light "red light 0"
+          orange_light "orange light 0"
+          green_light "green light 0"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot2 [
+        TrafficLightHorizontal {
+          red_light "red light 1"
+          orange_light "orange light 1"
+          green_light "green light 1"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot3 [
+        TrafficLightHorizontal {
+          red_light "red light 2"
+          orange_light "orange light 2"
+          green_light "green light 2"
+          lamp_geometry TrafficLightArrowLampGeometry {
+          }
+        }
+      ]
+    }
+    TrafficLightBigPole {
+      translation 10.4 0 -10.4
+      rotation 0 -1 0 1.5708
+      slot1 [
+        TrafficLight {
+          red_light "red light 3"
+          orange_light "orange light 3"
+          green_light "green light 3"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot2 [
+        TrafficLightHorizontal {
+          red_light "red light 4"
+          orange_light "orange light 4"
+          green_light "green light 4"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot3 [
+        TrafficLightHorizontal {
+          red_light "red light 5"
+          orange_light "orange light 5"
+          green_light "green light 5"
+          lamp_geometry TrafficLightArrowLampGeometry {
+          }
+        }
+      ]
+    }
+    TrafficLightBigPole {
+      translation 10.4 0 10.4
+      rotation 0 1 0 3.14159
+      slot1 [
+        TrafficLight {
+          red_light "red light 6"
+          orange_light "orange light 6"
+          green_light "green light 6"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot2 [
+        TrafficLightHorizontal {
+          red_light "red light 7"
+          orange_light "orange light 7"
+          green_light "green light 7"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot3 [
+        TrafficLightHorizontal {
+          red_light "red light 8"
+          orange_light "orange light 8"
+          green_light "green light 8"
+          lamp_geometry TrafficLightArrowLampGeometry {
+          }
+        }
+      ]
+    }
+    TrafficLightBigPole {
+      translation -10.4 0 10.4
+      rotation 0 1 0 1.5708
+      slot1 [
+        TrafficLight {
+          red_light "red light 9"
+          orange_light "orange light 9"
+          green_light "green light 9"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot2 [
+        TrafficLightHorizontal {
+          red_light "red light 10"
+          orange_light "orange light 10"
+          green_light "green light 10"
+          lamp_geometry TrafficLightStandardLampGeometry {
+          }
+        }
+      ]
+      slot3 [
+        TrafficLightHorizontal {
+          red_light "red light 11"
+          orange_light "orange light 11"
+          green_light "green light 11"
+          lamp_geometry TrafficLightArrowLampGeometry {
+          }
+        }
+      ]
+    }
+  ]
+  controller "crossroads_traffic_lights"
+}
+DEF STONES Solid {
+  translation 136.158 -4.23581 -5.03891
+  children [
+    DEF STONES_GROUP Group {
+      children [
+        Transform {
+          translation -2 -0.6 0
+          children [
+            Shape {
+              appearance DEF OBJECTS_APPEARANCE Appearance {
+                material Material {
+                  diffuseColor 0.5 0.5 0.5
+                }
+              }
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 3.5 -0.3 -0.5
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -2 -0.15 -4
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 1 0 -6
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.15 -9
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 5 0.2 -5.5
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.05 0
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -5 0 -10
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -6 0.3 -1
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 4 0 -13
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -1.5 0.4 -13.5
+          children [
+            Shape {
+              appearance USE OBJECTS_APPEARANCE
+              geometry Sphere {
+                radius 5
+                subdivision 2
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  boundingObject USE STONES_GROUP
+}
+BuildingUnderConstruction {
+  translation -110.896 2.13163e-14 -112.102
+}
+CommercialBuilding {
+  translation -31.6315 0 -70.9574
+}
+HollowBuilding {
+}
+Hotel {
+  translation -71.6228 -5.11591e-13 9.97953
+}
+TheThreeTowers {
+  translation 90.636 -2.84217e-14 -68.118
+}
+CyberboticsTower {
+  translation -68.7504 0 -27.5187
+}
+BigGlassTower {
+  translation 9.29537 -2.84217e-14 -68.6779
+  rotation 0 1 0 1.5708
+}
+Auditorium {
+  translation 61.9719 -2.13163e-13 63.9296
+  rotation 0 1 0 -0.9163
+}
+Museum {
+  translation 68.6571 2.13163e-14 0.191182
+}
+ResidentialBuilding {
+  translation 1.81329 -2.84217e-14 69.274
+}
+RoundTree {
+  translation 19.8126 3 -81.7751
+}
+RoundTree {
+  translation 99.1307 3 -50.4097
+}
+RoundTree {
+  translation 81.7163 3 -56.567
+}
+RoundTree {
+  translation 75.9885 3 36.8744
+}
+RoundTree {
+  translation 54.5924 3 35.4355
+}
+RoundTree {
+  translation -5.24018 3 -61.566
+}
+RoundTree {
+  translation 68.7408 3 26.6541
+}
+RoundTree {
+  translation 62.6042 3 -26.6454
+}
+RoundTree {
+  translation -65.4478 3 -68.0155
+}
+RoundTree {
+  translation -54.2763 3 -52.0661
+}
+RoundTree {
+  translation -63.11 3 -4.80322
+}
+RoundTree {
+  translation -4.92425 3 85.4708
+}
+RoundTree {
+  translation 9.61883 3 85.8355
+}
+RoundTree {
+  translation 24.9703 3 84.6727
+}
+RoundTree {
+  translation -81.8021 3 76.3128
+}
+RoundTree {
+  translation -120.797 3 -81.4509
+}
+RoundTree {
+  translation -42.6205 3 106.804
+}
+RoundTree {
+  translation -115.416 3 32.2671
+}
+RoundTree {
+  translation -33.1395 3 -121.921
+}
+PedestrianCrossing {
+  translation 26 -0.07 -45
+  rotation 0 1 0 1.5708
+}
+PedestrianCrossing {
+  translation -45.0693 -0.07 61.4608
+  rotation 0 1 0 3.1416
+}
+PedestrianCrossing {
+  translation 45.1201 -0.07 -26.9799
+  rotation 0 1 0 3.1416
+}
+CautionSign {
+  translation -48.9391 0 91.9275
+  signImage [
+    "textures/left_turn_sign.png"
+  ]
+}
+CautionSign {
+  translation 94.6291 1.24345e-14 -45.9944
+  rotation 0 1 0 -2.4871
+  signImage [
+    "textures/pedestrian_crossing.jpg"
+  ]
+}
+CautionSign {
+  translation -55.4925 -3.55271e-15 -8.87679
+}
+CautionSign {
+  translation -10.5534 0 -33.842
+  rotation 0 1 0 1.7017
+  signImage [
+    "textures/bump.jpg"
+  ]
+}
+CautionSign {
+  translation 26.9475 -3.55271e-15 -84.1154
+  rotation 0 1 0 0.6545
+  signImage [
+    "textures/cross_roads.jpg"
+  ]
+}
+CautionSign {
+  translation 34.1146 0 5.43669
+  rotation 0 1 0 -0.5236
+  signImage [
+    "textures/right_turn_sign.png"
+  ]
+}
+OrderSign {
+  translation -34.6769 7.10543e-15 45.1363
+  rotation 0 1 0 1.5708
+}
+OrderSign {
+  translation -34.3873 0 34.6135
+  rotation 0 1 0 1.5708
+}
+OrderSign {
+  translation -34.1742 0 55.4085
+  rotation 0 1 0 1.5708
+}
+OrderSign {
+  translation -34.4983 1.81188e-13 67.6589
+  rotation 0 1 0 3.14159
+  signImage [
+    "textures/no_right_turn.jpg"
+  ]
+}
+OrderSign {
+  translation -94.5041 -1.59872e-14 -5.21302
+  rotation 0 1 0 3.14159
+  signImage [
+    "textures/no_pedestrian_crossing.jpg"
+  ]
+}
+StopSign {
+  translation -34.2884 1.77636e-15 34.6012
+  rotation 0 1 0 -1.5708
+}
+YieldSign {
+  translation -66.4958 0 55.468
+  rotation 0 1 0 1.5708
+}
+SpeedLimitSign {
+  translation -20.4404 0 113.192
+  rotation 0 1 0 0.9163
+  signImage [
+    "textures/speed_limit_55.png"
+  ]
+}
+SpeedLimitSign {
+  translation 84.4244 1.77636e-14 -26.6277
+  rotation 0 1 0 0.6545
+  signImage [
+    "textures/speed_limit_55.png"
+  ]
+}
+SpeedLimitSign {
+  translation -79.1341 0 30.3528
+  rotation 0 1 0 -2.3562
+  signImage [
+    "textures/speed_limit_65.png"
+  ]
+}
+SpeedLimitSign {
+  translation 50.335 0 -87.1538
+  rotation 0 1 0 -3.14159
+  signImage [
+    "textures/speed_limit_65.png"
+  ]
+}
+SpeedLimitSign {
+  translation 34.4459 8.88178e-15 -31.0289
+  signImage [
+    "textures/one_way_sign_left.jpg"
+  ]
+}
+TrafficCone {
+  translation -33.9069 -0.00407355 50.8173
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -33.9069 -0.00407355 53.3447
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -34.0096 -0.00407355 48.1681
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -26.3545 -0.00407355 45.1042
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -33.9084 -0.00407355 45.5603
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -16.1833 -0.00407355 45.0952
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation -5.3104 -0.00407355 45.2957
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 7.33909 -0.00407355 44.7821
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 53.7607 -0.00407355 -33.9741
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 51.4349 -0.00407355 -33.9697
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 48.9543 -0.00407355 -33.9536
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 45.7233 -0.00407355 -33.7172
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 30.2338 -0.00407355 35.3608
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 18.6083 -0.00407355 42.3247
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 38.2371 -0.00407355 26.6857
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 43.7863 -0.00407355 13.7264
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 44.8672 -0.00407355 1.38509
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 44.8954 -0.00407355 -11.2175
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+TrafficCone {
+  translation 44.8151 -0.00407355 -22.1531
+  rotation -3.9676e-06 0.000500351 -1 0.0137034
+  physics Physics {
+    density -1
+    mass 1
+  }
+}
+OilBarrel {
+  translation 15.61 0.599959 104.099
+  rotation -2.77314e-16 -1 5.58598e-17 1.5708
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 33.38 0.599959 107.809
+  rotation -2.778e-16 -1 5.5872e-17 1.5708
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 54.77 0.599959 103.869
+  rotation -2.778e-16 -1 5.5872e-17 1.5708
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 105.104 0.599959 45
+  rotation 0.99983 0.0184037 0.000728758 4.43939e-16
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 45.2699 0.599959 21.3988
+  rotation -2.22486e-16 1 -2.80687e-17 -1.1781
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 45.3401 0.599959 22.9161
+  rotation -8.33947e-17 1 -5.53839e-17 1.9635
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation 45.7229 0.599959 22.1326
+  rotation 0.999772 0.0212915 0.00158684 4.44016e-16
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
+OilBarrel {
+  translation -20.1904 0.599959 48.6853
+  rotation 9.69611e-17 1 1.10981e-16 -1.7017
+  height 1.2
+  radius 0.4
+  physics Physics {
+    density -1
+    mass 100
+    damping Damping {
+    }
+  }
+}
